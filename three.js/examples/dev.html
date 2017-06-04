@@ -76,20 +76,15 @@
 	})
 
 	arToolkitSource.init(function onReady(){
-		onResize()
+		// handle resize of renderer
+		arToolkitSource.onResize([renderer.domElement, arToolkitContext.arController.canvas])		
 	})
 	
 	// handle resize
 	window.addEventListener('resize', function(){
-		onResize()
+		// handle arToolkitSource resize
+		arToolkitSource.onResize([renderer.domElement, arToolkitContext.arController.canvas])
 	})
-	function onResize(){
-		arToolkitSource.onResize()	
-		arToolkitSource.copySizeTo(renderer.domElement)	
-		if( arToolkitContext.arController !== null ){
-			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
-		}	
-	}
 
 	////////////////////////////////////////////////////////////////////////////////
 	//          initialize arToolkitContext
@@ -126,8 +121,8 @@
 		type : 'pattern',
 		// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro',
 		patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
-		patternUrl : 'marker-training/examples/pattern-files/pattern-kanji.patt',
-		patternUrl : 'marker-training/examples/pattern-files/pattern-hiro.patt',
+		patternUrl : 'marker-generator/examples/patternFiles/generated-kanji.patt',
+		patternUrl : 'marker-generator/examples/patternFiles/generated-hiro.patt',
 	})
 
 
