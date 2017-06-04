@@ -171,18 +171,13 @@ THREEx.ArToolkitSource.prototype._initSourceWebcam = function(onReady) {
 		}
 		
 
-		function pickDeviceAndroid(devices){
-			var videoDevices = devices.filter(function(device){
-				return device.kind === 'videoinput'
-			})
-			if( videoDevices.length !== 0 ){
-				var pickedDevice = videoDevices[videoDevices.length-1]
-				constraints.video.optional = [{sourceId: pickedDevice.deviceId}]
-				
-			}
+		function pickDeviceAndroid(){
+			devices.forEach(function(device) {
+				if( device.kind !== 'videoinput' )	return
+				constraints.video.optional = [{sourceId: device.deviceId}]
+			});			
 		}
 		function pickDeviceMacosx(){
-			// debugger
 			devices.forEach(function(device) {
 				if( device.kind !== 'videoinput' )	return
 
@@ -273,19 +268,14 @@ THREEx.ArToolkitSource.prototype.onResize = function(mirrorDomElements){
 	}
 	
 	// honor default parameters
-	// if( mirrorDomElements !== undefined )	console.warn('still use the old resize. fix it')
 	if( mirrorDomElements === undefined )	mirrorDomElements = []
 	if( mirrorDomElements instanceof Array === false )	mirrorDomElements = [mirrorDomElements]	
 
 	// Mirror _this.domElement.style to mirrorDomElements
 	mirrorDomElements.forEach(function(domElement){
-		_this.copySizeTo(domElement)
+		domElement.style.width = _this.domElement.style.width
+		domElement.style.height = _this.domElement.style.height	
+		domElement.style.marginLeft = _this.domElement.style.marginLeft
+		domElement.style.marginTop = _this.domElement.style.marginTop
 	})
-}
-
-THREEx.ArToolkitSource.prototype.copySizeTo = function(otherElement){
-	otherElement.style.width = this.domElement.style.width
-	otherElement.style.height = this.domElement.style.height	
-	otherElement.style.marginLeft = this.domElement.style.marginLeft
-	otherElement.style.marginTop = this.domElement.style.marginTop
 }

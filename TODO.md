@@ -1,10 +1,11 @@
+- THREEx.ArSmoothedControls.minVisibleDelay to 0 ?
+  - why would it be worst to show the marker, than to hide it ? 
 - TODO super unclear how to get the backward facing camera...
 
 - currently webvr is able to do location already
   - why wouldnt i code it all in webvr location, without the stereo rendering
   - well it is too early. it is better to make it easier to reuse.
   - webvr tango isnt mature enougth
-
 
 - release soon and start doing dev/master
   - create a dev branch
@@ -28,22 +29,6 @@
 
 ---
 
-- DONE THREEx.ArToolkitSource.prototype.onResize
-  split it in 
-  THREEx.ArToolkitSource.prototype.mirrorSizeTo(blabla)
-- DONE Race conditions in resize
-  - arToolkitSource.onResize([renderer.domElement, arToolkitContext.arController.canvas])
-  - fails if arToolkitContext.arController not ready
-  - change this code, and port is EVERYWHERE :)
-- DONE rename marker generator as marker-training - just because it is what artoolkit said before
-  - maybe creator ? 
-  - training is the same word as before, and seems to do something smart
-- DONE do something to upload marker from image directly instead of .patt
-  - this avoid the pain of handling .patt files
-  - so get the image encoding it, and then do a dataurl
-  - as the data is image
-- DONE THREEx.ArSmoothedControls.minVisibleDelay to 0 ?
-  - why would it be worst to show the marker, than to hide it ? 
 - DONE bug in resize + debug in context
   - API is still crap tho
 - DONE do the tweening + disapearance with timeout in threex-armarkersmoother.js

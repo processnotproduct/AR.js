@@ -59,20 +59,15 @@
 	})
 
 	arToolkitSource.init(function onReady(){
-		onResize()
+		// handle resize of renderer
+		arToolkitSource.onResize(renderer.domElement)		
 	})
 	
 	// handle resize
 	window.addEventListener('resize', function(){
-		onResize()
-	})
-	function onResize(){
-		arToolkitSource.onResize()	
-		arToolkitSource.copySizeTo(renderer.domElement)	
-		if( arToolkitContext.arController !== null ){
-			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
-		}	
-	}
+		// handle arToolkitSource resize
+		arToolkitSource.onResize(renderer.domElement)		
+	})	
 	////////////////////////////////////////////////////////////////////////////////
 	//          initialize arToolkitContext
 	////////////////////////////////////////////////////////////////////////////////
