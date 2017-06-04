@@ -1,2 +1,0 @@
-- add link to artoolkit tutorial
-- do a info popup

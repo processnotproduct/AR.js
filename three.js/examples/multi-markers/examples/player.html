@@ -93,6 +93,7 @@
 
 	var artoolkitProfile = new THREEx.ArToolkitProfile()
 	artoolkitProfile.sourceWebcam()
+		.performance('desktop-fast')
 
 	var arToolkitSource = new THREEx.ArToolkitSource(artoolkitProfile.sourceParameters)
 
@@ -136,32 +137,32 @@
 		{
 			type : 'pattern',
 			// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro',
-			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-generator/examples/patternFiles/generated-hiro.patt',
+			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-training/examples/pattern-files/pattern-hiro.patt',
 		},
 		{
 			type : 'pattern',
 			// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
-			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-generator/examples/patternFiles/generated-kanji.patt',
+			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-training/examples/pattern-files/pattern-kanji.patt',
 		},
 		{
 			type : 'pattern',
 			// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/multimarkers/multi-abcdef/patt.a',
-			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-generator/examples/patternFiles/generated-letterA.patt',
+			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-training/examples/pattern-files/pattern-letterA.patt',
 		},
 		{
 			type : 'pattern',
 			// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/multimarkers/multi-abcdef/patt.b',
-			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-generator/examples/patternFiles/generated-letterB.patt',
+			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-training/examples/pattern-files/pattern-letterB.patt',
 		},
 		{
 			type : 'pattern',
 			// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/multimarkers/multi-abcdef/patt.c',
-			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-generator/examples/patternFiles/generated-letterC.patt',
+			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-training/examples/pattern-files/pattern-letterC.patt',
 		},
 		{
 			type : 'pattern',
 			// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/multimarkers/multi-abcdef/patt.f',
-			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-generator/examples/patternFiles/generated-letterF.patt',
+			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-training/examples/pattern-files/pattern-letterF.patt',
 		},
 	]
 
@@ -251,16 +252,14 @@
 	// build a smoothedControls
 	var smoothedRoot = new THREE.Group()
 	scene.add(smoothedRoot)
-	var smoothedControls = new THREEx.ArSmoothedControls(smoothedRoot, {
-		lerpPosition: 0.7,
-		lerpQuaternion: 0.7,
-		lerpScale: 0.7,
-		minVisibleDelay: 0.0,
-		minUnvisibleDelay: 0.2,
-	})
+	var smoothedControls = new THREEx.ArSmoothedControls(smoothedRoot)
 	onRenderFcts.push(function(delta){
+		// update smoothedControls parameters depending on how many markers are visible in multiMarkerControls
+		multiMarkerControls.updateSmoothedControls(smoothedControls)
+		// update multiMarkerRoot position
 		smoothedControls.update(markerRoot)
-	})	
+	})
+
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Add simple object on smoothedRoot
 	//////////////////////////////////////////////////////////////////////////////////

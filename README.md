@@ -136,8 +136,8 @@ all the crazy ideas related to AR.js.
 
 Some applications:
 
-- [Pattern Marker Generator](https://jeromeetienne.github.io/AR.js/three.js/examples/marker-generator/examples/generator.html) :
-  Generator of [pattern markers](https://artoolkit.org/documentation/doku.php?id=3_Marker_Training:marker_training)
+- [Pattern Marker Training](https://jeromeetienne.github.io/AR.js/three.js/examples/marker-training/examples/generator.html) :
+  Generate a [pattern marker](https://artoolkit.org/documentation/doku.php?id=3_Marker_Training:marker_training) with your own image.
 - [ARCode Generator](https://jeromeetienne.github.io/AR.js/three.js/examples/arcode.html) :
   Generator of AR-Code
   ([source](https://github.com/jeromeetienne/AR.js/blob/master/three.js/examples/arcode.html))
@@ -183,9 +183,9 @@ Three.js Examples:
 - [videoinwebgl](https://jeromeetienne.github.io/AR.js/three.js/examples/videoinwebgl.html) :
   Add video in webgl - useful for phone-in-hmd usecase - work in progress
   ([source](https://github.com/jeromeetienne/AR.js/blob/master/three.js/examples/videoinwebgl.html))
-- [ar-in-webvr](https://jeromeetienne.github.io/AR.js/three.js/examples/ar-in-webvr.html) :
+- [webvr-for-ar](https://jeromeetienne.github.io/AR.js/three.js/examples/webvr-for-ar.html) :
   Displaying AR in WebVR - work in progress
-  ([source](https://github.com/jeromeetienne/AR.js/blob/master/three.js/examples/ar-in-webvr.html))
+  ([source](https://github.com/jeromeetienne/AR.js/blob/master/three.js/examples/webvr-for-ar.html))
 - [magic-book](https://jeromeetienne.github.io/AR.js/three.js/examples/magic-book/index.html) :
   Experimentation around magical book to open a secret door in [upload.io office](http://upload.io)
   ([source](https://github.com/jeromeetienne/AR.js/blob/master/three.js/examples/magic-book/index.html))
@@ -299,12 +299,6 @@ I exited to see what people will do with AR.js :)
   - by using gravity sensor
 - discover marker absolute orientation by comparing that to the phone gravity
   - can be used to know if the marker is on a table, or on a wall
-- area learning with markers 
-  - auto generation of multimarkers pattern
-  - the phone is in a mode acquisition
-  - the user walks around the room
-  - the phone takes statistic on markers location
-  - the actual area will be the average of those statistics.
 - cloud computing to get better rendering
   - fancy name for easy tech -
   [Capture a MediaStream From a Canvas, Video or Audio Element](https://developers.google.com/web/updates/2016/10/capture-stream)
@@ -343,6 +337,7 @@ Credits: @HelloDeadline, @sorianog
 # Ideas
 - AR Gaming - https://www.youtube.com/watch?v=EmGGGzibGok
 - AR Business Card - https://vimeo.com/4979525
+- ar cube visu - real nice for 360 AR https://twitter.com/jerome_etienne/status/869765239356747776
 - plug ar.js into sketchfab 
   - do a mockup with the monkey script
   - add a AR button on sketchfab, it pops up on marker on the screen with the instruction to connect to it

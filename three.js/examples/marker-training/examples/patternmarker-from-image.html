@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <meta name='viewport' content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0'>
 <!-- three.js library -->
-<script src='vendor/three.js/build/three.js'></script>
-<script src='vendor/three.js/examples/js/libs/stats.min.js'></script>
+<script src='../../vendor/three.js/build/three.js'></script>
+<script src='../../vendor/three.js/examples/js/libs/stats.min.js'></script>
 <!-- jsartookit -->
-<script src='../vendor/jsartoolkit5/build/artoolkit.min.js'></script>
-<script src='../vendor/jsartoolkit5/js/artoolkit.api.js'></script>
+<script src='../../../vendor/jsartoolkit5/build/artoolkit.min.js'></script>
+<script src='../../../vendor/jsartoolkit5/js/artoolkit.api.js'></script>
 <!-- include threex.artoolkit -->
-<script src='../threex-artoolkitsource.js'></script>
-<script src='../threex-artoolkitcontext.js'></script>
-<script src='../threex-artoolkitprofile.js'></script>
-<script src='../threex-arbasecontrols.js'></script>
-<script src='../threex-armarkercontrols.js'></script>
-<script src='../threex-arsmoothedcontrols.js'></script>
-<script>THREEx.ArToolkitContext.baseURL = '../'</script>
+<script src='../../../threex-artoolkitsource.js'></script>
+<script src='../../../threex-artoolkitcontext.js'></script>
+<script src='../../../threex-artoolkitprofile.js'></script>
+<script src='../../../threex-arbasecontrols.js'></script>
+<script src='../../../threex-armarkercontrols.js'></script>
+<script src='../../../threex-arsmoothedcontrols.js'></script>
+<script>THREEx.ArToolkitContext.baseURL = '../../../'</script>
+
+<!-- include THREEx.ArPatternFile -->
+<script src='../threex-arpatternfile.js'></script>
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'><div style='position: absolute; top: 10px; width:100%; text-align: center;z-index:1';>
 	<a href='https://github.com/jeromeetienne/AR.js/' target='_blank'>AR.js</a> - developement playground
@@ -76,20 +79,15 @@
 	})
 
 	arToolkitSource.init(function onReady(){
-		onResize()
+		// handle resize of renderer
+		arToolkitSource.onResize([renderer.domElement, arToolkitContext.arController.canvas])		
 	})
 	
 	// handle resize
 	window.addEventListener('resize', function(){
-		onResize()
+		// handle arToolkitSource resize
+		arToolkitSource.onResize([renderer.domElement, arToolkitContext.arController.canvas])
 	})
-	function onResize(){
-		arToolkitSource.onResize()	
-		arToolkitSource.copySizeTo(renderer.domElement)	
-		if( arToolkitContext.arController !== null ){
-			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
-		}	
-	}
 
 	////////////////////////////////////////////////////////////////////////////////
 	//          initialize arToolkitContext
@@ -122,14 +120,18 @@
 	
 	var markerRoot = new THREE.Group
 	scene.add(markerRoot)
-	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
-		type : 'pattern',
-		// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.hiro',
-		patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
-		patternUrl : 'marker-training/examples/pattern-files/pattern-kanji.patt',
-		patternUrl : 'marker-training/examples/pattern-files/pattern-hiro.patt',
-	})
 
+	// load image and convert it to a marker
+	var imageURL = THREEx.ArToolkitContext.baseURL + 'examples/marker-training/examples/inner-images/inner-hiro.png'
+	THREEx.ArPatternFile.encodeImageURL(imageURL, function onComplete(patternFileString){
+		var patternURL = 'data:text/plain;base64,' + btoa(patternFileString)
+		// create THREEx.ArMarkerControls
+		var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
+			type : 'pattern',
+			patternUrl : THREEx.ArToolkitContext.baseURL + 'examples/marker-training/examples/pattern-files/pattern-hiro.patt',
+			patternUrl : patternURL,
+		})	
+	})
 
 	// build a smoothedControls
 	var smoothedRoot = new THREE.Group()
